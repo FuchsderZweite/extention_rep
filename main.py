@@ -19,24 +19,48 @@ class Extention_rep:
             pass
 
     def extention(self):
-        file_count = 1
+        file_count = 0
         try:
             for file in listdir(self.dir_to_source):
                 if file.endswith(self.old_ext):
                     name = path.splitext(str(file))[0]
                     rename(self.dir_to_source + name + self.old_ext,
                               self.dir_to_source + name + self.new_ext)
+                    file_count += 1
                 else:
                     pass
-            file_count += 1
+
         except FileNotFoundError:
             print('Could not open files. Please check root directory.')
         print(f'Done! {file_count} files were renamed.')
 
+    def arb_sign(self):
+        file_count = 1
+        try:
+            for file in listdir(self.dir_to_source):
+                self.old_ext = self.dot_check()
+                self.new_ext = self.dot_check()
+                if file.endswith(self.old_ext):
+                    name = path.splitext(str(file))[0]
+                    rename(self.dir_to_source + name + self.old_ext,
+                            self.dir_to_source + name + self.new_ext)
+                else:
+                    pass
+                file_count += 1
+        except FileNotFoundError:
+            print('Could not open files. Please check root directory.')
+        print(f'Done! {file_count} files were renamed.')
+
+    def dot_check(self, string):
+        if string.find('.'):
+            return string
+        else:
+            return rename(string, '.' + string)
+
 
 def main():
-    dir = r'' # place our working directory here
-    replace = Extention_rep(dir_to_source=dir, old_ext='.png', new_ext='.jpg')
+    dir = r'/home/sergej/Desktop/docs/' # place our working directory here
+    replace = Extention_rep(dir_to_source=dir, old_ext='.mp4', new_ext='.jpg')
     replace.extention()
 
 if __name__ == '__main__':

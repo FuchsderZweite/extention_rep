@@ -22,9 +22,8 @@ class Extention_rep:
         file_count = 1
         try:
             for file in listdir(self.dir_to_source):
-                if file.endswith(self.old_ext):                                  # muss n string sein
+                if file.endswith(self.old_ext):
                     name = path.splitext(str(file))[0]
-                    #ext = os.path.splitext(str(file))[1]
                     rename(self.dir_to_source + name + self.old_ext,
                               self.dir_to_source + name + self.new_ext)
                 else:
@@ -36,8 +35,8 @@ class Extention_rep:
 
 
 def main():
-    dir = r'/home/sergej/Desktop/docs/'
-    replace = Extention_rep(dir_to_source=dir, old_ext='.mp4', new_ext='.jpg')
+    dir = r'' # place our working directory here
+    replace = Extention_rep(dir_to_source=dir, old_ext='.png', new_ext='.jpg')
     replace.extention()
 
 if __name__ == '__main__':
